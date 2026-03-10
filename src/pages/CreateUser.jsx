@@ -1,8 +1,10 @@
 import { useState } from "react";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
+import { Navigate, useNavigate } from "react-router-dom";
 
-function CreateUser(){
+function CreateUser(){  
+    const navigate = useNavigate()
 
     const [newUser, setNewUser] = useState({
         username: '',
@@ -19,12 +21,12 @@ function CreateUser(){
         }
 
         if(newUser.email === '' || newUser.email === null){
-            alert('El nombre es requerido')
+            alert('El correo es requerido')
             return
         }
 
         if(newUser.password === '' || newUser.password === null){
-            alert('El nombre es requerido')
+            alert('La contraseña es requerida')
             return
         }
 
@@ -52,6 +54,10 @@ function CreateUser(){
                 throw error //lanzar el error
             }
 
+            const {id} = data
+
+            navigate('/userDetail/' + id)
+
         } catch (error) {
             console.log(error.status, error.statusText)
             alert(`Error ${error.status}: ${error.statusText}`)
@@ -75,7 +81,7 @@ function CreateUser(){
                 }
                 />
                 <CustomInput
-                label={"email"}
+                label={"correo"}
                 type={"email"}
                 name={"email"}
                 value={newUser.email}
@@ -86,7 +92,7 @@ function CreateUser(){
                 }
                 />
                 <CustomInput
-                label={"password"}
+                label={"contraseña"}
                 type={"password"}
                 name={"password"}
                 value={newUser.password}
