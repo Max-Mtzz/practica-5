@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
+import CustomTable from "../components/CustomTable";
+import CustomButton from "../components/CustomButton";
+import { useNavigate } from "react-router-dom";
+import { httpClient } from "../API/http_client.gateway";
 
 function UserList(){
 
     const [users, setUsers] = useState([])
+    const columns = ['Nombre', 'Email', 'Acciones']
+    const navigate = useNavigate()
 
     const getUsers = async() => {
         //fetch es una promesa (función asincrona)
         //para manejar la respueta debo esperar a que se resuelva la promesa
-        const response = await fetch('https://fakestoreapi.com/users')
-        //response es un objeto de tipo response
-        //para obtener el cuerpo de la respuesta debo usar el método JSON
-        const data = await response.json()
-        console.log(data)
+        const data = await httpClient("users", "GET");
+
         setUsers(data)
     }
 
@@ -28,13 +31,20 @@ function UserList(){
                 (<p>Cargando Usuarios...</p>)
                 :
                 (
-                    users.map((user) =>{
-                        return(
-                            <div>
-                                <h3>{user.username}</h3>
-                            </div>
-                        )
-                    })
+                   <CustomTable 
+                   columns={columns}
+                   data={users.map((user) =>(
+                    {
+                        id: user.id,
+                        nombre: user.username,
+                        email: user.email,
+                        acciones: <>
+                            <CustomButton action={() => {navigate(`/userDetail/${user.id}`)}}>
+                                Ver Detalle
+                            </CustomButton>
+                        </>
+                    }
+                   ))}/>
                 )
             }
         </>
