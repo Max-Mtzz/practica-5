@@ -1,0 +1,27 @@
+.custom-button {
+    background-color: #2c3e50; /* Mismo azul elegante de la tabla */
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px; /* Bordes suavemente redondeados */
+    cursor: pointer;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 5px 5px 15px 0; /* Un poco de margen para que no se peguen entre sí */
+    
+    /* Animaciones suaves para el hover y el clic */
+    transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto al pasar el mouse por encima */
+.custom-button:hover {
+    background-color: #3b536b; /* Un azul un poco más claro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Agrega una pequeña sombra */
+}
+
+/* Efecto al hacer clic (se hunde ligeramente) */
+.custom-button:active {
+    transform: translateY(2px); /* Mueve el botón hacia abajo */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduce la sombra */
+}

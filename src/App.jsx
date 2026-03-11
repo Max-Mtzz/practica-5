@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
 import ProtectedRoutes from "./routes/ProtectedRoutes"
+import '../src/styles/App.css'
 
 function App() {
 

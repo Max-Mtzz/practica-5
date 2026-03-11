@@ -1,20 +1,26 @@
-function CustomTable({columns = [], data = []}){
-    return(
-        <>
-            <table>
+import '../styles/Table.css'
+
+function CustomTable({ columns = [], data = [] }) {
+    return (
+        // Agregamos un contenedor para que sea responsive en celulares
+        <div className="table-container">
+            <table className="custom-table">
                 <thead>
-                    {
-                        columns.map((column) =>(
-                            <th key={column}>{column}</th>
-                        ))
-                    }
+                    {/* ¡Aquí faltaba este <tr>! */}
+                    <tr>
+                        {
+                            columns.map((column) => (
+                                <th key={column}>{column}</th>
+                            ))
+                        }
+                    </tr>
                 </thead>
                 <tbody>
                     {
-                        data.map((item) =>(
+                        data.map((item) => (
                             <tr key={item.id}>
                                 {
-                                    columns.map((column) =>(
+                                    columns.map((column) => (
                                         <td key={column}>{item[column.toLowerCase()]}</td>
                                     ))
                                 }
@@ -23,7 +29,7 @@ function CustomTable({columns = [], data = []}){
                     }
                 </tbody>
             </table>
-        </>
+        </div>
     )
 }
 

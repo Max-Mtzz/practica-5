@@ -1,12 +1,12 @@
+import '../styles/Button.css'
+
 
 function CustomButton({children, action}){
 
     return(
-        <>
-            <button onClick={action}>
-                {children}
-            </button>
-        </>
+        <button className="custom-button" onClick={action}>
+            {children}
+        </button>
     )
 }
 

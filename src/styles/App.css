@@ -1,0 +1,57 @@
+/* 1. Reset básico para igualar márgenes en todos los navegadores */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 2. Estilos del fondo general de la pantalla */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7f6; /* Un gris muy claro y elegante */
+  color: #333333; /* Texto oscuro, pero no 100% negro para no cansar la vista */
+  line-height: 1.6;
+  padding: 20px; /* Separación de los bordes de la pantalla */
+}
+
+/* 3. Contenedor principal de React (la "tarjeta" blanca) */
+#root {
+  max-width: 1000px; /* Evita que la app se estire demasiado en monitores grandes */
+  margin: 0 auto; /* Centra el contenedor horizontalmente */
+  background-color: #ffffff; /* Fondo blanco para tu contenido */
+  padding: 40px; /* Espacio interno de la tarjeta */
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* Sombra suave para dar profundidad */
+  min-height: 80vh; /* Asegura que la tarjeta siempre tenga un buen tamaño */
+}
+
+/* 4. Estilos para los Títulos */
+h1, h2, h3 {
+  color: #2c3e50; /* El mismo azul oscuro de tus botones y tabla */
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+h1 {
+  font-size: 2.2rem;
+  border-bottom: 2px solid #ecf0f1; /* Una línea sutil debajo de los títulos principales */
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+}
+
+h2 {
+  font-size: 1.8rem;
+}
+
+/* 5. Textos normales */
+p {
+  margin-bottom: 16px;
+  font-size: 1rem;
+}
+
+/* Opcional: Centrar el contenido de la pantalla de Login */
+.login-container {
+  max-width: 400px;
+  margin: 40px auto;
+  text-align: center;
+}

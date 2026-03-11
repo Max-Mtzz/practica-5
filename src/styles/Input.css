@@ -1,0 +1,38 @@
+/* Contenedor que apila el texto y la caja, y los separa del siguiente input */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    max-width: 400px; /* Evita que el input se estire por toda la pantalla */
+}
+
+/* Estilo para el texto (Label) */
+.input-group label {
+    font-weight: 600;
+    color: #2c3e50; /* Mismo color azul de la cabecera de la tabla */
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+/* Estilo para la caja de texto (Input) */
+.custom-input {
+    padding: 10px 12px;
+    font-size: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #333333;
+    outline: none; /* Quita el borde azul por defecto que ponen los navegadores */
+    
+    /* Transición suave para el color y la sombra */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto focus: Cuando el usuario hace clic en el input para escribir */
+.custom-input:focus {
+    border-color: #2c3e50;
+    /* Crea un "resplandor" del mismo color pero transparente alrededor de la caja */
+    box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.15); 
+}
