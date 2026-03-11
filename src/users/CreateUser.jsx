@@ -2,6 +2,7 @@ import { useState } from "react";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
 import { useNavigate } from "react-router-dom";
+import { httpClient } from "../API/http_client.gateway";
 
 function CreateUser(){  
     const navigate = useNavigate()
@@ -34,18 +35,11 @@ function CreateUser(){
         try {
             //si dentro del try catch hay un error se ejecuta el catch y deja de ejecutar el codigo que sigue
             //hacemos una peticion
-             const response = await fetch('https://fakestoreapi.com/users',{
-            method: 'POST', //método de la petición
-            headers: { //metadatos de la petición
-                'Content-Type': 'application-json' //tipo de contenido de la petición
-            },
-            body: JSON.stringify(newUser) //información que se envía a la petición
-            })
-            //obtener respuesta
-            const data = await response.json()
+             
+            const data = await httpClient('users','POST', newUser)
 
             //si la respuesta no es ok, creamos un error personalizado
-            if(!response.ok){
+            if(!data && data.id){
                 //crear error
                 const error = new Error('Error al crear el usuario')
                 error.status = response.status
@@ -54,9 +48,7 @@ function CreateUser(){
                 throw error //lanzar el error
             }
 
-            const {id} = data
-
-            navigate('/userDetail/' + id)
+            navigate('/userDetail/' + data.id)
 
         } catch (error) {
             console.log(error.status, error.statusText)

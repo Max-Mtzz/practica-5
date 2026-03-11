@@ -3,9 +3,10 @@ import CustomTable from "../components/CustomTable";
 import CustomButton from "../components/CustomButton";
 import { useNavigate } from "react-router-dom";
 import { httpClient } from "../API/http_client.gateway";
+import { useAuth } from "../security/authContext";
 
 function UserList() {
-
+    const {borrarInformacionDeSesion} = useAuth()
     const [users, setUsers] = useState([])
     const columns = ['Username','Nombre','Apellido', 'Email','Password','Acciones']
     const navigate = useNavigate()
@@ -23,11 +24,18 @@ function UserList() {
         getUsers()
     }, [])
 
+    const logout = () =>{
+        borrarInformacionDeSesion()
+    }
+
     return (
         <>
             <h2>UsersList</h2>
             <CustomButton action={() => { navigate('/createUser') }}>
                 Crear usuario
+            </CustomButton>
+            <CustomButton action={logout}>
+                Cerrar Sesión
             </CustomButton>
             {
                 users.length === 0 ?
