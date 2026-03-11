@@ -6,9 +6,9 @@ import { httpClient } from "../API/http_client.gateway";
 import { useAuth } from "../security/authContext";
 
 function UserList() {
-    const {borrarInformacionDeSesion} = useAuth()
+    const { borrarInformacionDeSesion } = useAuth()
     const [users, setUsers] = useState([])
-    const columns = ['Username','Nombre','Apellido', 'Email','Password','Acciones']
+    const columns = ['Username', 'Nombre', 'Apellido', 'Email', 'Password', 'Acciones']
     const navigate = useNavigate()
 
     const getUsers = async () => {
@@ -24,8 +24,20 @@ function UserList() {
         getUsers()
     }, [])
 
-    const logout = () =>{
+    const logout = () => {
         borrarInformacionDeSesion()
+    }
+
+    const deleteUser = async (id) => {
+        // Hacemos la petición 
+        const data = await httpClient(`users/${id}`, 'DELETE');
+
+        // Si la API responde exitosamente
+        if (data) {
+            alert('¡Usuario eliminado con éxito!');
+        } else {
+            alert('Hubo un error al eliminar el usuario.');
+        }
     }
 
     return (
@@ -51,10 +63,13 @@ function UserList() {
                                     nombre: user.name.firstname,
                                     apellido: user.name.lastname,
                                     email: user.email,
-                                    password:user.password,
+                                    password: user.password,
                                     acciones: <>
                                         <CustomButton action={() => { navigate(`/userDetail/${user.id}`) }}>
                                             Ver Detalle
+                                        </CustomButton>
+                                        <CustomButton action={deleteUser}>
+                                            Borrar usuario
                                         </CustomButton>
                                     </>
                                 }
