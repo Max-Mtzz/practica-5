@@ -1,0 +1,60 @@
+import { useEffect, useState } from "react";
+import CustomTable from "../components/CustomTable";
+import CustomButton from "../components/CustomButton";
+import { useNavigate } from "react-router-dom";
+import { httpClient } from "../API/http_client.gateway";
+
+function UserList() {
+
+    const [users, setUsers] = useState([])
+    const columns = ['Username','Nombre','Apellido', 'Email','Password','Acciones']
+    const navigate = useNavigate()
+
+    const getUsers = async () => {
+        //fetch es una promesa (función asincrona)
+        //para manejar la respueta debo esperar a que se resuelva la promesa
+        const data = await httpClient("users", "GET");
+
+        setUsers(data)
+    }
+
+    useEffect(() => {
+        //cuando el comoponente se monta se ejecuta el efecto
+        getUsers()
+    }, [])
+
+    return (
+        <>
+            <h2>UsersList</h2>
+            <CustomButton action={() => { navigate('/createUser') }}>
+                Crear usuario
+            </CustomButton>
+            {
+                users.length === 0 ?
+                    (<p>Cargando Usuarios...</p>)
+                    :
+                    (
+                        <CustomTable
+                            columns={columns}
+                            data={users.map((user) => (
+                                {
+                                    id: user.id,
+                                    username: user.username,
+                                    nombre: user.name.firstname,
+                                    apellido: user.name.lastname,
+                                    email: user.email,
+                                    password:user.password,
+                                    acciones: <>
+                                        <CustomButton action={() => { navigate(`/userDetail/${user.id}`) }}>
+                                            Ver Detalle
+                                        </CustomButton>
+                                    </>
+                                }
+                            ))} />
+                    )
+            }
+        </>
+    )
+}
+
+export default UserList;

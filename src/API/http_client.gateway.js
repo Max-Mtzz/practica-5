@@ -2,7 +2,7 @@
 //la lógica para hacer peticiones
 import { API_URL } from "./constants"
 
-export const httpClient = async(url, method, body, headers) =>{
+export async function httpClient(url, method = 'GET', body, headers={}) {
     // si tengo un token para la autenticacion lo agrego a los headers
     const token = localStorage.getItem('token')
     
@@ -14,25 +14,21 @@ export const httpClient = async(url, method, body, headers) =>{
     try{
         //hago la peticion a mi base url + el recurso que quiero consumir
         const response = await fetch(API_URL+url,{
+            headers: {
+                ...headers,
+                'Content-Type': 'application/json'
+            },
             method: method,
-            body: body,
-            headers: headers,
+            body: JSON.stringify(body)
         })
 
-        //valida si la respuesta es ok si no es ok hacemos un error personalizado
-        if(!response.ok){
-            const error = new Error('Error al hacer la petición')
-            error.status = response.status
-            error.statusText = response.statusText
-            throw error
-        }
+        const data = await response.json()
 
         //retornamos directamente el cuerpo de la respuesta
-        return await response.json()
+        return data
 
     } catch (error){
         //mandamos el error
         console.log(error)
-        throw error
     }
 }

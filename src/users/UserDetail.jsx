@@ -28,8 +28,11 @@ function UserDetail(){
             user ? (
                 <>
                     <h2>User Detail</h2>
-                    <p>Nombre: {user.username}</p>
+                    <p>Nombre de usuario: {user.username}</p>
+                    <p>Nombre: {user.name.firstname}</p>
+                    <p>Apellido: {user.name.lastname}</p>
                     <p>Correo: {user.email}</p>
+                    <p>Contraseña: {user.password}</p>
                 </>
             ) : (
                 <p>Cargando Usuario...</p>

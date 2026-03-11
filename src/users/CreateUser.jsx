@@ -1,13 +1,13 @@
 import { useState } from "react";
 import CustomInput from "../components/CustomInput";
 import CustomButton from "../components/CustomButton";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function CreateUser(){  
     const navigate = useNavigate()
 
     const [newUser, setNewUser] = useState({
-        username: '',
+        username:'',
         email: '',
         password: ''
     })
@@ -67,10 +67,13 @@ function CreateUser(){
     return(
         <>
             <h2>Create User</h2>
+            <CustomButton action={() => { navigate('/users') }}>
+                Listar Usuarios
+            </CustomButton>
             {JSON.stringify(newUser)}
             <div>
                 <CustomInput
-                label={"username"}
+                label={"Username"}
                 type={"text"}
                 name={"username"}
                 value={newUser.username}
@@ -81,7 +84,7 @@ function CreateUser(){
                 }
                 />
                 <CustomInput
-                label={"correo"}
+                label={"Correo"}
                 type={"email"}
                 name={"email"}
                 value={newUser.email}
@@ -92,7 +95,7 @@ function CreateUser(){
                 }
                 />
                 <CustomInput
-                label={"contraseña"}
+                label={"Contraseña"}
                 type={"password"}
                 name={"password"}
                 value={newUser.password}
